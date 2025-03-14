@@ -18,15 +18,15 @@ export default async function Home() {
 
   return (
     <main className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-200 p-6 text-gray-900'>
-      <h1 className='text-5xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-12'>
+      <h1 className='text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-8 text-center'>
         Vocabular.io
       </h1>
 
-      <div className='border border-purple-300 p-10 rounded-3xl shadow text-center max-w-lg bg-white'>
-        <h3 className='text-6xl font-bold text-indigo-700'>
+      <div className='border border-purple-300 p-6 sm:p-10 rounded-3xl shadow text-center max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl bg-white break-words overflow-hidden'>
+        <h3 className='text-4xl sm:text-5xl font-bold text-indigo-700 break-words'>
           {word || 'Carregando...'}
         </h3>
-        <p className='text-lg mt-4 text-gray-600 italic'>
+        <p className='text-lg mt-4 text-gray-600 italic break-words'>
           {meaning || 'Buscando significado...'}
         </p>
 
@@ -58,8 +58,8 @@ export default async function Home() {
         )}
       </div>
       <CountdownTimer initialTimeLeft={timeLeft} />
-      <footer className='w-full flex justify-center items-center'>
-        <small className='font-medium backdrop-blur-lg bg-opacity-30 p-2 rounded-md text-gray-500'>
+      <footer className='w-full flex justify-center items-center mt-6'>
+        <small className='font-medium backdrop-blur-lg bg-opacity-30 p-2 rounded-md text-gray-500 text-center'>
           Desenvolvido por:{' '}
           <a
             href='https://github.com/moraiskaua'
