@@ -1,32 +1,48 @@
 import { prisma } from '@/lib/prisma';
+import { cache } from 'react';
 import { getMeaning } from './get-meaning';
 import { getWord } from './get-word';
-import { revalidateHome } from './revalidate-home';
 
-export async function getWordOfTheDay() {
+export const getWordOfTheDay = cache(async () => {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  let wordEntry = await prisma.word.findFirst({ where: { createdAt: today } });
+  let word = await prisma.word.findFirst({ where: { createdAt: today } });
 
-  if (!wordEntry) {
+  if (!word) {
     const newWord = await getWord();
-    const meaning = await getMeaning(newWord);
+    const {
+      consonants,
+      etymology,
+      grammaticalClass,
+      letters,
+      meaning,
+      reverseWord,
+      rhymes,
+      syllabicDivision,
+      vowels,
+    } = await getMeaning(newWord);
 
-    wordEntry = await prisma.word.create({
-      data: { word: newWord, meaning, createdAt: today },
+    word = await prisma.word.create({
+      data: {
+        word: newWord,
+        meaning,
+        consonants,
+        etymology,
+        grammaticalClass,
+        letters,
+        reverseWord,
+        rhymes,
+        syllabicDivision,
+        vowels,
+        createdAt: today,
+      },
     });
-
-    revalidateHome();
   }
 
-  const nextWordTime = new Date(today);
-  nextWordTime.setDate(today.getDate() + 1);
-  const timeLeft = nextWordTime.getTime() - now.getTime();
+  const nextDay = new Date(today);
+  nextDay.setDate(today.getDate() + 1);
+  const timeLeft = nextDay.getTime() - now.getTime();
 
-  return {
-    word: wordEntry.word,
-    meaning: wordEntry.meaning,
-    timeLeft,
-  };
-}
+  return { ...word, timeLeft };
+});

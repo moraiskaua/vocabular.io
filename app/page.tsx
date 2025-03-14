@@ -3,7 +3,19 @@ import CountdownTimer from '@/components/count-down-timer';
 import Script from 'next/script';
 
 export default async function Home() {
-  const { word, meaning, timeLeft } = await getWordOfTheDay();
+  const {
+    word,
+    meaning,
+    grammaticalClass,
+    syllabicDivision,
+    etymology,
+    letters,
+    vowels,
+    consonants,
+    reverseWord,
+    rhymes,
+    timeLeft,
+  } = await getWordOfTheDay();
 
   return (
     <main className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-200 p-6 text-gray-900'>
@@ -17,27 +29,46 @@ export default async function Home() {
         Vocabular.io
       </h1>
 
-      <div className='to-indigo-100 via-white from-purple-200 border border-purple-300 p-10 rounded-3xl shadow text-center max-w-lg'>
+      <div className='border border-purple-300 p-10 rounded-3xl shadow text-center max-w-lg bg-white'>
         <h3 className='text-6xl font-bold text-indigo-700'>
           {word || 'Carregando...'}
         </h3>
         <p className='text-lg mt-4 text-gray-600 italic'>
           {meaning || 'Buscando significado...'}
         </p>
+
+        {grammaticalClass && (
+          <p className='mt-2 text-sm text-gray-500'>{grammaticalClass}</p>
+        )}
+        {syllabicDivision && (
+          <p className='mt-1 text-sm text-gray-500'>
+            Separação silábica: {syllabicDivision}
+          </p>
+        )}
+        {etymology && (
+          <p className='mt-1 text-sm text-gray-500'>Etimologia: {etymology}</p>
+        )}
+        {letters && (
+          <p className='mt-1 text-sm text-gray-500'>Letras: {letters}</p>
+        )}
+        {vowels && (
+          <p className='mt-1 text-sm text-gray-500'>Vogais: {vowels}</p>
+        )}
+        {consonants && (
+          <p className='mt-1 text-sm text-gray-500'>Consoantes: {consonants}</p>
+        )}
+        {reverseWord && (
+          <p className='mt-1 text-sm text-gray-500'>
+            Ao contrário: {reverseWord}
+          </p>
+        )}
+        {rhymes && (
+          <p className='mt-2 text-sm text-gray-500'>Rimas: {rhymes}</p>
+        )}
       </div>
 
-      <CountdownTimer initialTimeLeft={timeLeft} />
-
-      <div className='mt-8'>
-        <ins
-          className='adsbygoogle'
-          style={{ display: 'block' }}
-          data-ad-client='ca-pub-XXXXXXXXXXXXXXX'
-          data-ad-slot='XXXXXXXXXX'
-          data-ad-format='auto'
-          data-full-width-responsive='true'
-        />
-        <Script>{`(adsbygoogle = window.adsbygoogle || []).push({});`}</Script>
+      <div className='mt-6 text-gray-700 text-lg'>
+        Próxima palavra em: <CountdownTimer initialTimeLeft={timeLeft} />
       </div>
     </main>
   );
