@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import Script from 'next/script';
+import Head from 'next/head';
 import './globals.css';
 
 const geistSans = Geist({
@@ -25,10 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='pt-BR'>
-      <Script
-        async
-        src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8599593121033831'
-      />
+      <Head>
+        <script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8599593121033831'
+        ></script>
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

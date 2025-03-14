@@ -58,6 +58,15 @@ export default async function Home() {
         )}
       </div>
       <CountdownTimer initialTimeLeft={timeLeft} />
+      <div className='my-8'>
+        <ins
+          className='adsbygoogle'
+          style={{ display: 'block' }}
+          data-ad-client='ca-pub-8599593121033831'
+          data-ad-slot='1234567890'
+          data-ad-format='auto'
+        ></ins>
+      </div>
       <footer className='w-full flex justify-center items-center'>
         <small className='font-medium backdrop-blur-lg bg-opacity-30 p-2 rounded-md text-gray-500'>
           Desenvolvido por:{' '}
