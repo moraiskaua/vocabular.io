@@ -58,18 +58,18 @@ export default async function Home() {
         )}
       </div>
       <CountdownTimer initialTimeLeft={timeLeft} />
-      <footer className='w-full bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-500 text-white py-4 mt-12 flex justify-center items-center'>
-        <p className='text-lg font-medium backdrop-blur-lg bg-opacity-30 p-2 rounded-md'>
+      <footer className='w-full flex justify-center items-center'>
+        <small className='font-medium backdrop-blur-lg bg-opacity-30 p-2 rounded-md text-gray-500'>
           Desenvolvido por:{' '}
           <a
             href='https://github.com/moraiskaua'
             target='_blank'
             rel='noopener noreferrer'
-            className='text-indigo-200 hover:text-indigo-400 transition-colors'
+            className='bg-gradient-to-br from-purple-400 via-blue-400 to-purple-500 bg-clip-text text-transparent transition-colors'
           >
             moraiskaua
           </a>
-        </p>
+        </small>
       </footer>
     </main>
   );
