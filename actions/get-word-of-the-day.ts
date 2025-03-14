@@ -1,9 +1,24 @@
 import { prisma } from '@/lib/prisma';
-import { cache } from 'react';
 import { getMeaning } from './get-meaning';
 import { getWord } from './get-word';
 
-export const getWordOfTheDay = cache(async () => {
+type WordOfTheDay = {
+  meaning: string;
+  word: string;
+  id: string;
+  grammaticalClass: string;
+  syllabicDivision: string;
+  etymology: string;
+  letters: number | null;
+  vowels: string;
+  consonants: string;
+  reverseWord: string;
+  rhymes: string;
+  createdAt: Date;
+  timeLeft: number;
+};
+
+export const getWordOfTheDay = async (): Promise<WordOfTheDay> => {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
@@ -57,4 +72,4 @@ export const getWordOfTheDay = cache(async () => {
   const timeLeft = nextDay.getTime() - now.getTime();
 
   return { ...word, timeLeft };
-});
+};
