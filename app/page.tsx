@@ -66,6 +66,20 @@ export default async function Home() {
       </div>
 
       <CountdownTimer initialTimeLeft={timeLeft} />
+
+      <footer className='w-full flex justify-center items-center'>
+        <small className='font-medium backdrop-blur-lg bg-opacity-30 p-2 rounded-md text-gray-500'>
+          Desenvolvido por:{' '}
+          <a
+            href='https://github.com/moraiskaua'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='bg-gradient-to-br from-purple-400 via-blue-400 to-purple-500 bg-clip-text text-transparent transition-colors'
+          >
+            moraiskaua
+          </a>
+        </small>
+      </footer>
     </main>
   );
 }
