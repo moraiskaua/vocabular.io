@@ -1,6 +1,5 @@
 import { getWordOfTheDay } from '@/actions/get-word-of-the-day';
 import CountdownTimer from '@/components/count-down-timer';
-import Script from 'next/script';
 
 export default async function Home() {
   const {
@@ -19,12 +18,6 @@ export default async function Home() {
 
   return (
     <main className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-200 p-6 text-gray-900'>
-      <Script
-        async
-        src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
-        strategy='afterInteractive'
-      />
-
       <h1 className='text-5xl font-extrabold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-12'>
         Vocabular.io
       </h1>
@@ -64,21 +57,19 @@ export default async function Home() {
           <p className='mt-2 text-sm text-gray-500'>Rimas: {rhymes}</p>
         )}
       </div>
-
       <CountdownTimer initialTimeLeft={timeLeft} />
-
-      <footer className='w-full flex justify-center items-center'>
-        <small className='font-medium backdrop-blur-lg bg-opacity-30 p-2 rounded-md text-gray-500'>
+      <footer className='w-full bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-500 text-white py-4 mt-12 flex justify-center items-center'>
+        <p className='text-lg font-medium backdrop-blur-lg bg-opacity-30 p-2 rounded-md'>
           Desenvolvido por:{' '}
           <a
             href='https://github.com/moraiskaua'
             target='_blank'
             rel='noopener noreferrer'
-            className='bg-gradient-to-br from-purple-400 via-blue-400 to-purple-500 bg-clip-text text-transparent transition-colors'
+            className='text-indigo-200 hover:text-indigo-400 transition-colors'
           >
             moraiskaua
           </a>
-        </small>
+        </p>
       </footer>
     </main>
   );
