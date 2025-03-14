@@ -10,7 +10,15 @@ export const getWordOfTheDay = cache(async () => {
   let word = await prisma.word.findFirst({ where: { createdAt: today } });
 
   if (!word) {
-    const newWord = await getWord();
+    let newWord = await getWord();
+    const existingWord = await prisma.word.findUnique({
+      where: { word: newWord },
+    });
+
+    if (existingWord) {
+      return getWordOfTheDay();
+    }
+
     const {
       consonants,
       etymology,
@@ -22,6 +30,10 @@ export const getWordOfTheDay = cache(async () => {
       syllabicDivision,
       vowels,
     } = await getMeaning(newWord);
+
+    if (meaning === 'Significado não encontrado.') {
+      return getWordOfTheDay();
+    }
 
     word = await prisma.word.create({
       data: {

@@ -45,9 +45,6 @@ export default async function Home() {
             Separação silábica: {syllabicDivision}
           </p>
         )}
-        {etymology && (
-          <p className='mt-1 text-sm text-gray-500'>Etimologia: {etymology}</p>
-        )}
         {letters && (
           <p className='mt-1 text-sm text-gray-500'>Letras: {letters}</p>
         )}
@@ -62,14 +59,13 @@ export default async function Home() {
             Ao contrário: {reverseWord}
           </p>
         )}
+        {etymology && <p className='mt-1 text-sm text-gray-500'>{etymology}</p>}
         {rhymes && (
           <p className='mt-2 text-sm text-gray-500'>Rimas: {rhymes}</p>
         )}
       </div>
 
-      <div className='mt-6 text-gray-700 text-lg'>
-        Próxima palavra em: <CountdownTimer initialTimeLeft={timeLeft} />
-      </div>
+      <CountdownTimer initialTimeLeft={timeLeft} />
     </main>
   );
 }

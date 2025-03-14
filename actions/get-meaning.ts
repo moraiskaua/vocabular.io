@@ -6,7 +6,13 @@ export async function getMeaning(word: string) {
     const { data } = await axios.get(`https://www.dicio.com.br/${word}/`);
     const $ = cheerio.load(data);
 
-    const meaning = $('.significado span[class!="etim"]').first().text().trim();
+    const meaningElement = $('.significado').first();
+    let meaning = meaningElement
+      .children('span:not(.etim)')
+      .map((_, el) => $(el).text().trim())
+      .get()
+      .join(' ');
+
     const grammaticalClass = $('.adicional b').first().text().trim();
     const syllabicDivision = $('.adicional b').eq(1).text().trim();
     const etymology = $('.significado .etim').text().trim();
@@ -24,6 +30,7 @@ export async function getMeaning(word: string) {
       .join(', ');
 
     let finalMeaning = meaning;
+
     if (!meaning || meaning === grammaticalClass) {
       finalMeaning = 'Significado não encontrado.';
     }
@@ -39,11 +46,9 @@ export async function getMeaning(word: string) {
       reverseWord: reverseWord ?? '',
       rhymes: rhymes ?? '',
     };
-  } catch (error) {
-    console.error('Erro ao buscar significado:', error);
-
+  } catch {
     return {
-      meaning: 'Erro ao buscar significado.',
+      meaning: 'Significado não encontrado.',
       grammaticalClass: '',
       syllabicDivision: '',
       etymology: '',
