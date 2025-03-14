@@ -2,7 +2,8 @@ import { getWordOfTheDay } from '@/actions/get-word-of-the-day';
 import Script from 'next/script';
 
 export default async function Home() {
-  const wordData = await getWordOfTheDay();
+  const { word, meaning } = await getWordOfTheDay();
+  console.log(word, meaning);
 
   return (
     <main className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-900 to-purple-900 text-white p-6'>
@@ -12,8 +13,8 @@ export default async function Home() {
         strategy='afterInteractive'
       />
       <div className='bg-white text-gray-900 p-8 rounded-3xl shadow-lg text-center max-w-lg'>
-        <h1 className='text-5xl font-bold'>{wordData.word}</h1>
-        <p className='text-lg mt-4'>{wordData.meaning}</p>
+        <h1 className='text-5xl font-bold'>{word}</h1>
+        <p className='text-lg mt-4'>{meaning}</p>
       </div>
       <div className='mt-6'>
         <ins

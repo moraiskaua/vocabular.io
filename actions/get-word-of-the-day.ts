@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
 import { getMeaning } from './get-meaning';
 import { getWord } from './get-word';
+import { revalidateHome } from './revalidate-home';
 
 export async function getWordOfTheDay() {
   const now = new Date();
@@ -16,7 +16,7 @@ export async function getWordOfTheDay() {
       data: { word: newWord, meaning, createdAt: today },
     });
 
-    revalidatePath('/');
+    revalidateHome();
   }
 
   return word;
